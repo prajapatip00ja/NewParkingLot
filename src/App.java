@@ -2,9 +2,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-/**
- * Created by poojap on 28/04/15.
- */
+
+
+
 public class App {
     public static void main(String[] args) {
         App app = new App();
@@ -17,16 +17,21 @@ public class App {
             int CarNo = app.getCarNo(sc);
 
             Driver driver1 = new Driver();
-            if(option == parkCar){
-                cars.add(new Car(CarNo));
-                driver1.parkCar(parkingLot,cars);
-            }
-            else{
+            cars.add(new Car(CarNo));
+            if(option == parkCar)
+                parkCar(driver1,cars,parkingLot);
+            else
                 driver1.unParkCar(parkingLot,new Car(CarNo));
                 if(!cars.isEmpty() && parkingLot.isPlaceAvailable())
-                    driver1.parkCar(parkingLot,cars);
-            }
+                    driver1.parkCar(parkingLot,cars.poll());
         }
+    }
+
+    private static void parkCar(Driver driver1, Queue<Car> cars, ParkingLot parkingLot) {
+           Car car = cars.poll();
+           if(driver1.parkCar(parkingLot,car)!=null){
+                cars.add(car);
+           }
     }
 
     private int getOption(Scanner sc){

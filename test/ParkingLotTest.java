@@ -1,19 +1,14 @@
 import org.junit.Test;
 
-import java.util.LinkedList;
-import java.util.Queue;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
-/**
- * Created by poojap on 28/04/15.
- */
+
 public class ParkingLotTest {
     @Test
     public void isPlaceAvailableShouldReturnTrueWhenParkingLotIsFree(){
        ParkingLot pl = new ParkingLot();
-       Driver driver = new Driver();
        assertTrue(pl.isPlaceAvailable());
     }
 
@@ -21,9 +16,7 @@ public class ParkingLotTest {
     public void isPlaceAvailableShouldReturnTrueWhenOneCarIsParked(){
         ParkingLot pl = new ParkingLot();
         Driver driver = new Driver();
-        Queue<Car> cars = new LinkedList<Car>();
-        cars.add(new Car(10));
-        driver.parkCar(pl,cars);
+        driver.parkCar(pl,new Car(11));
         assertTrue(pl.isPlaceAvailable());
     }
 
@@ -31,11 +24,8 @@ public class ParkingLotTest {
     public void isPlaceAvailableShouldReturnFalseWhenParkingLotIsFull(){
         ParkingLot pl = new ParkingLot();
         Driver driver = new Driver();
-        Queue<Car> cars = new LinkedList<Car>();
-        cars.add(new Car(10));
-        cars.add(new Car(11));
-        driver.parkCar(pl, cars);
-        driver.parkCar(pl,cars);
+        driver.parkCar(pl, new Car(10));
+        driver.parkCar(pl,new Car(11));
         assertFalse(pl.isPlaceAvailable());
     }
 
@@ -43,12 +33,9 @@ public class ParkingLotTest {
     public void isPlaceAvailableShouldReturnTrueWhenParkingLotIsFullAndOneCarIsReleasing(){
         ParkingLot pl = new ParkingLot();
         Driver driver = new Driver();
-        Queue<Car> cars = new LinkedList<Car>();
-        cars.add(new Car(10));
-        cars.add(new Car(11));
-        driver.parkCar(pl,cars);
-        driver.parkCar(pl,cars);
-        driver.unParkCar(pl,new Car(10));
+        driver.parkCar(pl,new Car(10));
+        driver.parkCar(pl,new Car(11));
+        driver.unParkCar(pl,new Car(11));
         assertTrue(pl.isPlaceAvailable());
     }
 

@@ -17,5 +17,8 @@ public class Car {
         return true;
     }
 
-
+    @Override
+    public String toString() {
+        return "car "+carNo;
+    }
 }
