@@ -1,9 +1,10 @@
+import java.util.Queue;
 
 public class Driver  {
 
-    public void parkCar(ParkingLot parkingLot, Car car) {
+    public void parkCar(ParkingLot parkingLot, Queue<Car> cars) {
         if(parkingLot.isPlaceAvailable()){
-            parkingLot.addCar(car);
+            parkingLot.addCar(cars.poll());
             System.out.println("car parked");
         }
         else
