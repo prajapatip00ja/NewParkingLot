@@ -1,8 +1,17 @@
-/**
- * Created by poojap on 25/04/15.
- */
-public abstract class Driver {
-    protected ParkingLot parkingLot;
-    public abstract void parkCar(Car car);
-    public abstract void unparkCar(Car car);
+
+public class Driver  {
+
+    public void parkCar(ParkingLot parkingLot, Car car) {
+        if(parkingLot.isPlaceAvailable()){
+            parkingLot.addCar(car);
+            System.out.println("car parked");
+        }
+        else
+            System.out.println("no place");
+    }
+
+    public void unParkCar(ParkingLot parkingLot,Car car){
+        parkingLot.releaseCar(car);
+        System.out.println("removed");
+    }
 }
