@@ -6,32 +6,32 @@ import java.util.Scanner;
 
 
 public class App {
-    public static void main(String[] args) {
-        App app = new App();
-        ParkingLot parkingLot = new ParkingLot();
-        Scanner sc = new Scanner(System.in);
-        Queue<Car> cars =  new LinkedList<Car>();
-        final int parkCar = 1;
-        while (true){
-            int option = app.getOption(sc);
-            int CarNo = app.getCarNo(sc);
+    private ParkingLot parkingLot;
+    private  Queue<Car> cars;
 
-            Driver driver1 = new Driver();
-            cars.add(new Car(CarNo));
-            if(option == parkCar)
-                parkCar(driver1,cars,parkingLot);
-            else
-                driver1.unParkCar(parkingLot,new Car(CarNo));
-                if(!cars.isEmpty() && parkingLot.isPlaceAvailable())
-                    driver1.parkCar(parkingLot,cars.poll());
-        }
+    public App(ParkingLot pl) {
+        this.parkingLot = pl;
+        cars = new LinkedList<Car>();
     }
 
-    private static void parkCar(Driver driver1, Queue<Car> cars, ParkingLot parkingLot) {
-           Car car = cars.poll();
-           if(driver1.parkCar(parkingLot,car)!=null){
-                cars.add(car);
-           }
+    public void run(int carNo,int option){
+        final int parkCar = 1;
+        Driver driver = new Driver();
+        if(option == parkCar) {
+            cars.add(new Car(carNo));
+            parkCar(driver,cars,parkingLot);
+        }
+        else
+            driver.unParkCar(parkingLot,new Car(carNo));
+            if(!cars.isEmpty() && parkingLot.isPlaceAvailable())
+                driver.parkCar(parkingLot,cars.poll());
+    }
+
+    private static void parkCar(Driver driver, Queue<Car> cars, ParkingLot parkingLot) {
+        Car car = cars.poll();
+        if(driver.parkCar(parkingLot,car)!=null){
+            cars.add(car);
+        }
     }
 
     private int getOption(Scanner sc){
@@ -43,5 +43,7 @@ public class App {
         System.out.println("Enter car no.");
         return sc.nextInt();
     }
+
+
 
 }
