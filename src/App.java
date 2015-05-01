@@ -44,6 +44,19 @@ public class App {
         return sc.nextInt();
     }
 
+    public static void main(String[] args) {
+        ParkingLot parkingLot = new ParkingLot();
+        App app = new App(parkingLot);
+        Scanner sc = new Scanner(System.in);
+        int i = 0;
+        while(i<4){
+        int option = app.getOption(sc);
+        int carNo = app.getCarNo(sc);
+            app.run(carNo,option);
+            i++;
+        }
+    }
+
 
 
 }
